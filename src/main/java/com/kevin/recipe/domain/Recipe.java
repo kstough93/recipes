@@ -23,6 +23,13 @@ public class Recipe {
     private Set<Ingredient> ingredients;
     @Lob
     private Byte[] image;
+    @OneToOne(cascade = CascadeType.ALL)
+    private Notes notes;
+    @ManyToMany
+    @JoinTable(name = "recipes_category",
+            joinColumns = @JoinColumn(name = "recipe_id"),
+            inverseJoinColumns = @JoinColumn(name = "category_id"))
+    private Set<Category> categories;
 
     public Long getId() {
         return id;
@@ -31,9 +38,6 @@ public class Recipe {
     public void setId(Long id) {
         this.id = id;
     }
-
-    @OneToOne(cascade = CascadeType.ALL)
-    private Notes notes;
 
     public String getDescription() {
         return description;
@@ -113,5 +117,13 @@ public class Recipe {
 
     public void setNotes(Notes notes) {
         this.notes = notes;
+    }
+
+    public Set<Category> getCategories() {
+        return categories;
+    }
+
+    public void setCategories(Set<Category> categories) {
+        this.categories = categories;
     }
 }
