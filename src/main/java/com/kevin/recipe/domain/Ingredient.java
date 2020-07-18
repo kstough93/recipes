@@ -1,10 +1,13 @@
 package com.kevin.recipe.domain;
 
+import lombok.*;
 import org.hibernate.annotations.Fetch;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
 
+@Data
+@EqualsAndHashCode(exclude = {"recipe"})
 @Entity
 public class Ingredient {
 
@@ -20,40 +23,12 @@ public class Ingredient {
     @ManyToOne
     private Recipe recipe;
 
-    public Long getId() {
-        return id;
-    }
+    public Ingredient() { }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
+    public Ingredient(String description, BigDecimal amount, UnitOfMeasure uom) {
         this.description = description;
-    }
-
-    public BigDecimal getAmount() {
-        return amount;
-    }
-
-    public void setAmount(BigDecimal amount) {
         this.amount = amount;
+        this.uom = uom;
     }
-
-    public Recipe getRecipe() {
-        return recipe;
-    }
-
-    public void setRecipe(Recipe recipe) {
-        this.recipe = recipe;
-    }
-
-    public UnitOfMeasure getUom() { return uom; }
-
-    public void setUom(UnitOfMeasure uom) { this.uom = uom; }
 
 }
